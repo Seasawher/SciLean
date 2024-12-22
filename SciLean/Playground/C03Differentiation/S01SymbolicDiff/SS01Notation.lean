@@ -1,4 +1,6 @@
-import SciLean
+-- import SciLean
+import SciLean.Analysis.Calculus.Notation.Deriv
+import SciLean.Analysis.Scalar.Notation
 
 open SciLean Scalar
 
