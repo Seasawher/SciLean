@@ -46,6 +46,24 @@ end
 -/
 section
 
+variable {L : ℝ → ℝ → ℝ} {t : ℝ} {x y : ℝ → ℝ}
 
+private noncomputable def «rhs» : ℝ :=
+  let «dx/dt» : ℝ → ℝ := ∂ t, x t
+  ∂ (t := t), (L (x t) («dx/dt» t))
+
+private noncomputable def «lhs» : ℝ :=
+  let «dx/dt» : ℝ → ℝ := ∂ t, x t
+  let «∂L/∂y» : ℝ → ℝ → ℝ := fun x => ∂ y, (L x y)
+  ∂ (t := t), («∂L/∂y» (x t) («dx/dt» t))
+
+-- 自分の回答。
+#check «lhs» - «rhs»
+
+-- 本にある解答。
+-- じっくりにらむと、上記の自分の解答と同じになっているっぽい…
+#check
+  let v := ∂ x
+  ∂ (t':=t), (∂ (v':=v t'), L (x t') v') - ∂ (x':=x t), L x' (v t)
 
 end
